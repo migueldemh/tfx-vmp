@@ -4,7 +4,7 @@ variable "tf_hostname" {
   default = "app.terraform.io"
 }
 
-variable "tf_token" {
+variable "TFx_org_token" {
   description = "Terraform API Token."
   type = string
   default = "none"
