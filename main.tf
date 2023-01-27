@@ -16,7 +16,7 @@ terraform {
 
 provider "tfe" {
   hostname = var.tf_hostname
-  token    = var.tf_token
+  token    = var.TFx_org_token
 }
 
 
