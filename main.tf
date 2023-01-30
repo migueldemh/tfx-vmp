@@ -65,7 +65,7 @@ resource "tfe_team_access" "app-dev" {
 resource "tfe_team_access" "app-dev-release" {
   for_each = { for k, v in tfe_workspace.test : k => v.id }
   access = "write"
-  team_id = tfe_team.app-release-team.id
+  team_id = tfe_team.app-dev-release-team.id
   workspace_id = each.value
 }
 
