@@ -69,13 +69,6 @@ resource "tfe_team_access" "app-dev-release" {
   workspace_id = each.value
 }
 
-resource "tfe_team_access" "app-dev" {
-  for_each = { for k, v in tfe_workspace.test : k => v.id }
-  access = "plan"
-  team_id = tfe_team.app-dev-team.id
-  workspace_id = each.value
-}
-
 resource "tfe_team_access" "app-dev-admin" {
   for_each = { for k, v in tfe_workspace.test : k => v.id }
   access = "admin"
