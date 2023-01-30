@@ -27,10 +27,6 @@ resource "tfe_workspace" "test" {
   organization = var.tf_organization
 }
 
-output "tf_workspace_ids" {
-  value = { for k, v in tfe_workspace.test : k => v.id }
-}
-
 resource "tfe_variable" "test" {
   for_each = { for k, v in tfe_workspace.test : k => v.id }
   key = "test_key_name"
@@ -42,4 +38,51 @@ resource "tfe_variable" "test" {
 resource "tfe_team" "test" {
   name = "test-team-name"
   organization = var.tf_organization
+}
+
+resource "tfe_team" "app-dev-team" {
+  name = "app-dev-team"
+  organization = var.tf_organization
+}
+
+resource "tfe_team" "app-dev-release-team" {
+  name = "app-dev-release-team"
+  organization = var.tf_organization
+}
+
+resource "tfe_team" "app-dev-admin-team" {
+  name = "app-dev-admin-team"
+  organization = var.tf_organization
+}
+
+resource "tfe_team_access" "app-dev" {
+  for_each = { for k, v in tfe_workspace.test : k => v.id }
+  access = "plan"
+  team_id = tfe_team.app-dev-team.id
+  workspace_id = each.value
+}
+
+resource "tfe_team_access" "app-dev-release" {
+  for_each = { for k, v in tfe_workspace.test : k => v.id }
+  access = "write"
+  team_id = tfe_team.app-release-team.id
+  workspace_id = each.value
+}
+
+resource "tfe_team_access" "app-dev" {
+  for_each = { for k, v in tfe_workspace.test : k => v.id }
+  access = "plan"
+  team_id = tfe_team.app-dev-team.id
+  workspace_id = each.value
+}
+
+resource "tfe_team_access" "app-dev-admin" {
+  for_each = { for k, v in tfe_workspace.test : k => v.id }
+  access = "admin"
+  team_id = tfe_team.app-dev-admin-team.id
+  workspace_id = each.value
+}
+
+output "tf_workspace_ids" {
+  value = { for k, v in tfe_workspace.test : k => v.id }
 }
