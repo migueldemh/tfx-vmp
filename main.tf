@@ -76,10 +76,10 @@ resource "tfe_team_access" "app-dev-admin" {
   workspace_id = each.value
 }
 
-resource "tfe_team_member" "external" {
-  team_id  = tfe_team.app-dev-team.id
-  username = "miguelheredero"
-}
+#resource "tfe_team_member" "external" {
+#  team_id  = tfe_team.app-dev-team.id
+#  username = "<USER-NAME>"
+#}
 
 output "tf_workspace_ids" {
   value = { for k, v in tfe_workspace.test : k => v.id }

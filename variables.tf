@@ -13,7 +13,7 @@ variable "TFx_org_token" {
 variable "tf_organization" {
   description = "Name of the TF Organization"
   type = string
-  default = "test-lloyds-demo"
+  default = "<ADD-ORG-NAME-FROM-TFC>"
 }
 
 variable "tf_workspaces" {
