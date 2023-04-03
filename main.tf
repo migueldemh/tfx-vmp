@@ -19,6 +19,12 @@ provider "tfe" {
   token    = var.TFx_org_token
 }
 
+provider "tfe" {
+  alias = "organization"
+  token = var.TFx_org_token
+
+}
+
 
 
 resource "tfe_workspace" "test" {
