@@ -13,7 +13,7 @@ variable "TFx_org_token" {
 variable "tf_organization" {
   description = "Name of the TF Organization"
   type = string
-  default = "bupa-test-org"
+  default = "migueldemh"
 }
 
 variable "tf_workspaces" {
@@ -21,4 +21,9 @@ variable "tf_workspaces" {
   type = set(string)
   default = ["workspaceA",
     "workspaceB", "workspaceC"]
+}
+variable "agent_pool_set" {
+  default     = false
+  type        = bool
+  description = "(Optional Bool) Flag to control of agent pool"
 }
