@@ -7,6 +7,10 @@ terraform {
       source = "hashicorp/tfe"
       version = "0.38.0"
     }
+    environment = {
+      source  = "EppO/environment"
+      version = "1.3.3"
+    }
     null = {
       source = "hashicorp/null"
       version = "~> 3.1.0"
@@ -25,7 +29,19 @@ provider "tfe" {
 
 }
 
+data "environment_variables" "all" {
+}
+data "environment_variables" "atlas_slug" {
+  filter = "^ATLAS_WORKSPACE_SLUG"
+}
 
+
+locals {
+  list_organization_workspace = split("/", data.environment_variables.atlas_slug.items.ATLAS_WORKSPACE_SLUG)
+  organization                = local.list_organization_workspace["0"]
+  workspace                   = local.list_organization_workspace["1"]
+  audit_timestamp             = var.audit_timestamp != "" ? var.audit_timestamp : timeadd(timestamp(), "-1m")
+}
 
 resource "tfe_workspace" "test" {
   for_each = var.tf_workspaces
