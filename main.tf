@@ -39,19 +39,7 @@ locals {
   workspace                   = local.list_organization_workspace["1"]
 }
 
-resource "tfe_workspace" "test" {
-  for_each = var.tf_workspaces
-  name = each.key
-  organization = var.tf_organization
-}
 
-resource "tfe_variable" "test" {
-  for_each = { for k, v in tfe_workspace.test : k => v.id }
-  key = "test_key_name"
-  value = "test_value_name"
-  category = "terraform"
-  workspace_id = each.value
-}
 
 resource "tfe_team" "test" {
   name = "test-team-name"
