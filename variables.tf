@@ -13,7 +13,7 @@ variable "TFx_org_token" {
 variable "tf_organization" {
   description = "Name of the TF Organization"
   type = string
-  default = "bank-tfc-test-tfe"
+  default = "tfc-customer-sway-test"
 }
 
 variable "tf_workspaces" {
