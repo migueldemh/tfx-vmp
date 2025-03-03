@@ -25,5 +25,5 @@ variable "tf_workspaces" {
 variable "agent_pool_set" {
   default     = false
   type        = bool
-  description = "(Optional Bool) Flag to control of agent pool"
+  description = "(Optional Bool) Flag to control of agent pools"
 }
